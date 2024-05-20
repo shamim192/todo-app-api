@@ -1,66 +1,302 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel To-Do List API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a RESTful API for a To-Do List application built with Laravel.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Create a new task
+- Retrieve a list of all tasks
+- Retrieve a specific task by ID
+- Update the title, description, or completion status of a task
+- Delete a task by ID
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.0
+- Composer
+- MySQL
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clone the repository**:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    ```sh
+    git clone https://github.com/shamim192/todo-app-api.git
+    cd laravel-todo-api
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **Install dependencies**:
 
-## Laravel Sponsors
+    ```sh
+    composer install
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. **Copy the example environment file and configure environment settings**:
 
-### Premium Partners
+    ```sh
+    cp .env.example .env
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    Open the `.env` file and set your database configurations:
 
-## Contributing
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_database_user
+    DB_PASSWORD=your_database_password
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Generate an application key**:
 
-## Code of Conduct
+    ```sh
+    php artisan key:generate
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. **Run the database migrations**:
 
-## Security Vulnerabilities
+    ```sh
+    php artisan migrate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Run the application**:
 
-## License
+    ```sh
+    php artisan serve
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    The application will be available at `http://localhost:8000`.
+
+## API Endpoints
+
+### Create Task
+
+- **URL**: `/api/tasks`
+- **Method**: `POST`
+- **Body Parameters**:
+  - `title` (string, required): The title of the task.
+  - `description` (string, optional): The description of the task.
+  - `is_completed` (boolean, optional): The completion status of the task.
+
+- **Response**:
+  - `201 Created` on success
+
+### Read Tasks
+
+- **URL**: `/api/tasks`
+- **Method**: `GET`
+
+- **Response**:
+  - `200 OK` on success
+
+### Read Single Task
+
+- **URL**: `/api/tasks/{id}`
+- **Method**: `GET`
+
+- **Response**:
+  - `200 OK` on success
+  - `404 Not Found` if the task does not exist
+
+### Update Task
+
+- **URL**: `/api/tasks/{id}`
+- **Method**: `PUT`
+- **Body Parameters**:
+  - `title` (string, required): The title of the task.
+  - `description` (string, optional): The description of the task.
+  - `is_completed` (boolean, optional): The completion status of the task.
+
+- **Response**:
+  - `200 OK` on success
+  - `404 Not Found` if the task does not exist
+
+### Delete Task
+
+- **URL**: `/api/tasks/{id}`
+- **Method**: `DELETE`
+
+- **Response**:
+  - `200 OK` on success
+  - `404 Not Found` if the task does not exist
+
+## Testing
+
+### Unit Tests
+
+To run the unit tests, execute the following command:
+
+```sh
+php artisan test
+```
+### API Documentation
+  
+This project uses Laravel Scribe for API documentation. To generate the documentation, run:
+
+```sh
+php artisan scribe:generate
+```
+You can view the generated documentation by navigating to /docs in your browser when the application is running.
+
+### Unit Tests for API Endpoints
+
+Here's a complete example of the unit tests for the API endpoints using Laravel's testing tools. These tests cover various scenarios including edge cases:
+
+```php
+namespace Tests\Feature;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+use App\Models\Task;
+
+class TaskTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /** @test */
+    public function create_a_task()
+    {
+        $data = [
+            'title' => 'Test Task',
+            'description' => 'Test Description',
+            'is_completed' => false
+        ];
+
+        $this->postJson('/api/tasks', $data)
+            ->assertStatus(201)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Task created successfully.',
+                'data' => [
+                    'title' => 'Test Task',
+                    'description' => 'Test Description',
+                    'is_completed' => false
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function retrieve_all_tasks()
+    {
+        Task::factory()->count(5)->create();
+
+        $this->getJson('/api/tasks')
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'success',
+                'message',
+                'data' => [
+                    '*' => [
+                        'id',
+                        'title',
+                        'description',
+                        'is_completed',
+                        'created_at',
+                        'updated_at'
+                    ]
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function retrieve_a_single_task()
+    {
+        $task = Task::factory()->create();
+
+        $this->getJson("/api/tasks/{$task->id}")
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Task retrieved successfully.',
+                'data' => [
+                    'id' => $task->id,
+                    'title' => $task->title,
+                    'description' => $task->description,
+                    'is_completed' => $task->is_completed,
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function returns_404_if_task_not_found()
+    {
+        $this->getJson('/api/tasks/999')
+            ->assertStatus(404)
+            ->assertJson([
+                'success' => false,
+                'message' => 'Task not found',
+                'data' => null,
+            ]);
+    }
+
+    /** @test */
+    public function update_a_task()
+    {
+        $task = Task::factory()->create();
+
+        $data = [
+            'title' => 'Updated Task',
+            'description' => 'Updated Description',
+            'is_completed' => true,
+        ];
+
+        $this->putJson("/api/tasks/{$task->id}", $data)
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Task updated successfully.',
+                'data' => [
+                    'id' => $task->id,
+                    'title' => 'Updated Task',
+                    'description' => 'Updated Description',
+                    'is_completed' => true,
+                ]
+            ]);
+    }
+
+    /** @test */
+    public function returns_404_if_updating_non_existing_task()
+    {
+        $data = [
+            'title' => 'Updated Task',
+            'description' => 'Updated Description',
+            'is_completed' => true,
+        ];
+
+        $this->putJson('/api/tasks/999', $data)
+            ->assertStatus(404)
+            ->assertJson([
+                'success' => false,
+                'message' => 'Task not found',
+                'data' => null,
+            ]);
+    }
+
+    /** @test */
+    public function delete_a_task()
+    {
+        $task = Task::factory()->create();
+
+        $this->deleteJson("/api/tasks/{$task->id}")
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'message' => 'Task deleted successfully.',
+                'data' => null,
+            ]);
+    }
+
+    /** @test */
+    public function returns_404_if_deleting_non_existing_task()
+    {
+        $this->deleteJson('/api/tasks/999')
+            ->assertStatus(404)
+            ->assertJson([
+                'success' => false,
+                'message' => 'Task not found',
+                'data' => null,
+            ]);
+    }
+}
+
