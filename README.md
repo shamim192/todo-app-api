@@ -2,16 +2,10 @@
 
 This is a RESTful API for a To-Do List application built with Laravel.
 
-## Features
-
--   Create a new task
--   Retrieve a list of all tasks
--   Retrieve a specific task by ID
--   Update the title, description, or completion status of a task
--   Delete a task by ID
 
 ## Requirements
 
+-   laravel 11
 -   PHP >= 8.0
 -   Composer
 -   MySQL
