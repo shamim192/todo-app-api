@@ -2,7 +2,6 @@
 
 This is a RESTful API for a To-Do List application built with Laravel.
 
-
 ## Requirements
 
 -   laravel 11
@@ -73,7 +72,7 @@ This is a RESTful API for a To-Do List application built with Laravel.
 -   **Description**: Retrieve a list of all tasks.
 
 -   **Response**:
-    -   **200 OK**:
+    -   `200 OK` on success
 
 #### Create Task
 
@@ -81,14 +80,14 @@ This is a RESTful API for a To-Do List application built with Laravel.
 -   **Method**: `POST`
 -   **Description**: Create a new task.
 -   **Body Parameters**:
+
     -   `title` (string, required): The title of the task. Example: `Buy groceries`
     -   `description` (string, optional): The description of the task. Example: `Milk, Bread, Cheese`
     -   `is_completed` (boolean, optional): The completion status of the task. Example: `false`
 
 -   **Response**:
-    -   **201 Created**:
-    -   **422 Unprocessable Entity**:
-       
+    -   `200 Created` on success
+    -   `422 Unprocessable Entity` if validation fails
 
 #### Retrieve a Single Task
 
@@ -96,11 +95,12 @@ This is a RESTful API for a To-Do List application built with Laravel.
 -   **Method**: `GET`
 -   **Description**: Retrieve a specific task by ID.
 -   **URL Parameter**:
+
     -   `id` (integer, required): The ID of the task. Example: `1`
 
 -   **Response**:
-    -   **200 OK**:
-    -   **404 Not Found**:
+    -   `200 OK` on success
+    -   `404 Not Found` if the task does not exist
 
 #### Update Task
 
@@ -110,14 +110,15 @@ This is a RESTful API for a To-Do List application built with Laravel.
 -   **URL Parameter**:
     -   `id` (integer, required): The ID of the task. Example: `1`
 -   **Body Parameters**:
+
     -   `title` (string, required): The title of the task. Example: `Buy groceries`
     -   `description` (string, optional): The description of the task. Example: `Milk, Bread, Cheese`
     -   `is_completed` (boolean, optional): The completion status of the task. Example: `false`
 
 -   **Response**:
-    -   **200 OK**:
-    -   **404 Not Found**:
-    -   **422 Unprocessable Entity**:
+    -   `200 OK` on success
+    -   `404 Not Found` if the task does not exist
+    -   `422 Unprocessable Entity` if validation fails
 
 #### Delete Task
 
@@ -125,11 +126,12 @@ This is a RESTful API for a To-Do List application built with Laravel.
 -   **Method**: `DELETE`
 -   **Description**: Delete a task by ID.
 -   **URL Parameter**:
+
     -   `id` (integer, required): The ID of the task. Example: `1`
 
 -   **Response**:
-    -   **200 OK**:
-    -   **404 Not Found**:
+    -   `200 OK` on success
+    -   `404 Not Found` if the task does not exist
 
 ## Testing
 
