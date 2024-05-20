@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
-   /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -20,7 +20,7 @@ class TaskController extends Controller
             'message' => 'Tasks retrieved successfully.',
             'data' => $data,
         ], 200);
-    }   
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -78,7 +78,7 @@ class TaskController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'string|nullable',
+            'title' => 'required|string|max:255',
             'description' => 'string|nullable',
             'is_completed' => 'boolean|nullable',
         ]);
@@ -116,7 +116,7 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         $data = Task::find($id);
-        
+
         if (!$data) {
             return response()->json([
                 'success' => false,
