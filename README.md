@@ -4,17 +4,17 @@ This is a RESTful API for a To-Do List application built with Laravel.
 
 ## Features
 
-- Create a new task
-- Retrieve a list of all tasks
-- Retrieve a specific task by ID
-- Update the title, description, or completion status of a task
-- Delete a task by ID
+-   Create a new task
+-   Retrieve a list of all tasks
+-   Retrieve a specific task by ID
+-   Update the title, description, or completion status of a task
+-   Delete a task by ID
 
 ## Requirements
 
-- PHP >= 8.0
-- Composer
-- MySQL
+-   PHP >= 8.0
+-   Composer
+-   MySQL
 
 ## Installation
 
@@ -22,7 +22,7 @@ This is a RESTful API for a To-Do List application built with Laravel.
 
     ```sh
     git clone https://github.com/shamim192/todo-app-api.git
-    cd laravel-todo-api
+    cd todo-app-api
     ```
 
 2. **Install dependencies**:
@@ -44,8 +44,8 @@ This is a RESTful API for a To-Do List application built with Laravel.
     DB_HOST=127.0.0.1
     DB_PORT=3306
     DB_DATABASE=your_database_name
-    DB_USERNAME=your_database_user
-    DB_PASSWORD=your_database_password
+    DB_USERNAME=root
+    DB_PASSWORD=
     ```
 
 4. **Generate an application key**:
@@ -70,56 +70,72 @@ This is a RESTful API for a To-Do List application built with Laravel.
 
 ## API Endpoints
 
-### Create Task
+### Task Management
 
-- **URL**: `/api/tasks`
-- **Method**: `POST`
-- **Body Parameters**:
-  - `title` (string, required): The title of the task.
-  - `description` (string, optional): The description of the task.
-  - `is_completed` (boolean, optional): The completion status of the task.
+#### Retrieve All Tasks
 
-- **Response**:
-  - `201 Created` on success
+-   **URL**: `/api/tasks`
+-   **Method**: `GET`
+-   **Description**: Retrieve a list of all tasks.
 
-### Read Tasks
+-   **Response**:
+    -   **200 OK**:
 
-- **URL**: `/api/tasks`
-- **Method**: `GET`
+#### Create Task
 
-- **Response**:
-  - `200 OK` on success
+-   **URL**: `/api/tasks`
+-   **Method**: `POST`
+-   **Description**: Create a new task.
+-   **Body Parameters**:
+    -   `title` (string, required): The title of the task. Example: `Buy groceries`
+    -   `description` (string, optional): The description of the task. Example: `Milk, Bread, Cheese`
+    -   `is_completed` (boolean, optional): The completion status of the task. Example: `false`
 
-### Read Single Task
+-   **Response**:
+    -   **201 Created**:
+    -   **422 Unprocessable Entity**:
+       
 
-- **URL**: `/api/tasks/{id}`
-- **Method**: `GET`
+#### Retrieve a Single Task
 
-- **Response**:
-  - `200 OK` on success
-  - `404 Not Found` if the task does not exist
+-   **URL**: `/api/tasks/{id}`
+-   **Method**: `GET`
+-   **Description**: Retrieve a specific task by ID.
+-   **URL Parameter**:
+    -   `id` (integer, required): The ID of the task. Example: `1`
 
-### Update Task
+-   **Response**:
+    -   **200 OK**:
+    -   **404 Not Found**:
 
-- **URL**: `/api/tasks/{id}`
-- **Method**: `PUT`
-- **Body Parameters**:
-  - `title` (string, required): The title of the task.
-  - `description` (string, optional): The description of the task.
-  - `is_completed` (boolean, optional): The completion status of the task.
+#### Update Task
 
-- **Response**:
-  - `200 OK` on success
-  - `404 Not Found` if the task does not exist
+-   **URL**: `/api/tasks/{id}`
+-   **Method**: `PUT`
+-   **Description**: Update the title, description, or completion status of a task.
+-   **URL Parameter**:
+    -   `id` (integer, required): The ID of the task. Example: `1`
+-   **Body Parameters**:
+    -   `title` (string, required): The title of the task. Example: `Buy groceries`
+    -   `description` (string, optional): The description of the task. Example: `Milk, Bread, Cheese`
+    -   `is_completed` (boolean, optional): The completion status of the task. Example: `false`
 
-### Delete Task
+-   **Response**:
+    -   **200 OK**:
+    -   **404 Not Found**:
+    -   **422 Unprocessable Entity**:
 
-- **URL**: `/api/tasks/{id}`
-- **Method**: `DELETE`
+#### Delete Task
 
-- **Response**:
-  - `200 OK` on success
-  - `404 Not Found` if the task does not exist
+-   **URL**: `/api/tasks/{id}`
+-   **Method**: `DELETE`
+-   **Description**: Delete a task by ID.
+-   **URL Parameter**:
+    -   `id` (integer, required): The ID of the task. Example: `1`
+
+-   **Response**:
+    -   **200 OK**:
+    -   **404 Not Found**:
 
 ## Testing
 
@@ -130,13 +146,15 @@ To run the unit tests, execute the following command:
 ```sh
 php artisan test
 ```
+
 ### API Documentation
-  
+
 This project uses Laravel Scribe for API documentation. To generate the documentation, run:
 
 ```sh
 php artisan scribe:generate
 ```
+
 You can view the generated documentation by navigating to /docs in your browser when the application is running.
 
 ### Unit Tests for API Endpoints
@@ -300,3 +318,4 @@ class TaskTest extends TestCase
     }
 }
 
+```
