@@ -10,6 +10,23 @@ class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *  
+     * @group Task Management
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Tasks retrieved successfully.",
+     *   "data": [
+     *     {
+     *       "id": 1,
+     *       "title": "Task title",
+     *       "description": "Task description",
+     *       "is_completed": false,
+     *       "created_at": "2023-01-01T00:00:00.000000Z",
+     *       "updated_at": "2023-01-01T00:00:00.000000Z"
+     *     }
+     *   ]
+     * }
+
      */
     public function index()
     {
@@ -24,6 +41,32 @@ class TaskController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @group Task Management
+     * @bodyParam title string required The title of the task. Example: Buy groceries
+     * @bodyParam description string The description of the task. Example: Milk, Bread, Cheese
+     * @bodyParam is_completed boolean The completion status of the task. Example: false
+     * @response 201 {
+     *   "success": true,
+     *   "message": "Task created successfully.",
+     *   "data": {
+     *     "id": 1,
+     *     "title": "Buy groceries",
+     *     "description": "Milk, Bread, Cheese",
+     *     "is_completed": false,
+     *     "created_at": "2023-01-01T00:00:00.000000Z",
+     *     "updated_at": "2023-01-01T00:00:00.000000Z"
+     *   }
+     * }
+     * @response 422 {
+     *   "success": false,
+     *   "message": "Validation errors",
+     *   "data": {
+     *     "title": [
+     *       "The title field is required."
+     *     ]
+     *   }
+     * }
      */
     public function store(Request $request)
     {
@@ -52,6 +95,26 @@ class TaskController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * @group Task Management
+     * @urlParam id integer required The ID of the task. Example: 1
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Task retrieved successfully.",
+     *   "data": {
+     *     "id": 1,
+     *     "title": "Buy groceries",
+     *     "description": "Milk, Bread, Cheese",
+     *     "is_completed": false,
+     *     "created_at": "2023-01-01T00:00:00.000000Z",
+     *     "updated_at": "2023-01-01T00:00:00.000000Z"
+     *   }
+     * }
+     * @response 404 {
+     *   "success": false,
+     *   "message": "Task not found",
+     *   "data": null
+     * }
      */
     public function show(string $id)
     {
@@ -74,6 +137,38 @@ class TaskController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @group Task Management
+     * @urlParam id integer required The ID of the task. Example: 1
+     * @bodyParam title string required The title of the task. Example: Buy groceries
+     * @bodyParam description string The description of the task. Example: Milk, Bread, Cheese
+     * @bodyParam is_completed boolean The completion status of the task. Example: false
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Task updated successfully.",
+     *   "data": {
+     *     "id": 1,
+     *     "title": "Buy groceries
+     *     "description": "Milk, Bread, Cheese",
+     *     "is_completed": false,
+     *     "created_at": "2023-01-01T00:00:00.000000Z",
+     *     "updated_at": "2023-01-01T00:00:00.000000Z"
+     *   }
+     * }
+     * @response 404 {
+     *   "success": false,
+     *   "message": "Task not found",
+     *   "data": null
+     * }
+     * @response 422 {
+     *   "success": false,
+     *   "message": "Validation errors",
+     *   "data": {
+     *     "title": [
+     *       "The title field is required."
+     *     ]
+     *   }
+     * }
      */
     public function update(Request $request, string $id)
     {
@@ -112,6 +207,18 @@ class TaskController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @group Task Management
+     * @urlParam id integer required The ID of the task. Example: 1
+     * @response 200 {
+     *   "success": true,
+     *   "message": "Task deleted successfully.",
+     *   "data": null
+     * }
+     * @response 404 {
+     *   "success": false,
+     *   "message": "Task not found",
+     *   "data": null
+     * }
      */
     public function destroy(string $id)
     {
